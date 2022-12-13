@@ -1,23 +1,178 @@
 @use "../globals" as *;
 @use "../parts/common" as *;
 
-#global-container{
-    display: flex;
-    flex-wrap: wrap;
+.title{
+  font-size: 24px;
+  text-align: center;
+  padding: 30px 0;
 }
-#inner-container{
-    flex-basis: 50%;
-    height: 50vh;
-    &:nth-child(1) {
-        background-color: rgba(20, 20, 20, 0.4);
+
+#global-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#container {
+  flex-basis: 50%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4%;
+  background-color: rgba(30, 30, 30, 0.2);
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px 0px rgba(30, 30, 30, 0.4);;
+
+  &:nth-child(2n-1){
+    border-right: 2px solid rgba(30, 30, 30, 0.5);;
+  }
+}
+
+.inner {
+  text-align: center;
+  width: 100%;
+}
+
+.microCopy {
+  font-weight: bold;
+  position: relative;
+  margin-bottom: 10px;
+  color: $cWhite;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: $cWhite;
+    position: absolute;
+    top: 2px;
+    left: 25px;
+    transform-origin: left;
+    transform: rotate(50deg);
+  }
+  &::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: $cWhite;
+    position: absolute;
+    top: 2px;
+    right: 25px;
+    transform-origin: right;
+    transform: rotate(-50deg);
+  }
+  &.disNone {
+    display: none;
+  }
+}
+
+.btn {
+  width: 100%;
+  height: 60px;
+  background-color: #30a05c;
+  border: none;
+  box-shadow: 0 5px 0 0 #00662d;
+  //   border-bottom: 5px solid #00662d;
+  border-radius: 30px;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    top: 45%;
+    right: 15px;
+    transform: translateY(-50%) rotate(-45deg);
+    transform-origin: top right;
+  }
+  &::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    top: 45%;
+    right: 15px;
+    transform: translateY(-50%) rotate(45deg);
+    transform-origin: bottom right;
+  }
+  &:hover {
+    background-color: #20cf65;
+    & .topCommit{
+      color: #20cf65;
+      border: 2px solid #20cf65;
     }
-    &:nth-child(2) {
-        background-color: rgba(60, 60, 60, 0.4);
+  }
+  &.translate {
+    &:hover {
+      background-color: #20cf65;
+      box-shadow: none;
+      transform: translateY(5px);
     }
-    &:nth-child(3) {
-        background-color: rgba(100, 100, 100, 0.4);
+  }
+
+  & a {
+    text-decoration: none;
+    color: $cWhite;
+    font-size: 19px;
+    & .topCommit {
+      font-size: 0.8em;
+      font-weight: bold;
+      background-color: $cWhite;
+      color: #30a05c;
+      border-radius: 3px;
+      border: 2px solid #30a05c;
+      box-shadow: 0 2px 3px 0px #00662d;
+      position: absolute;
+      width: 90%;
+      top: -17px;
+      left: 50%;
+      transform: translateX(-50%);
     }
-    &:nth-child(4) {
-        background-color: rgba(140, 140, 140, 0.4);
+  }
+
+  &.spread-shadow {
+    box-shadow: 0 0 3px 2px #00662d;
+    &:hover {
+      transform: scale(1.5);
+      box-shadow: none;
     }
+  }
+  &.square {
+    border-radius: 5px;
+  }
+  &.bounce {
+    @include animation(
+      $name: bounce,
+      $duration: 2s,
+      $iteration-count: infinite,
+      // $delay: 0.3s
+    )
+  }
+  &:hover{
+    animation: none;
+  }
+}
+
+@keyframes bounce {
+  0%,20%,35%,52%,100%{
+    transform: translateY(0);
+  }
+  15%{
+    transform: translateY(-15px);
+  }
+  28%{
+    transform: translateY(-7px);
+  }
+  40%{
+    transform: translateY(-4px);
+  }
 }
